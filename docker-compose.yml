@@ -5,21 +5,21 @@ services:
     build: .
     container_name: flask_app
     ports:
-      - "3001:5000"  # Map port 5000 in the container to port 3000 on the host
+      - "3001:5000"  
     environment:
-      - MONGO_HOST=mongodb  # Hostname for MongoDB service (same as the MongoDB container name)
+      - MONGO_HOST=mongodb  
       - MONGO_PORT=27017
     depends_on:
       - mongodb
 
   mongodb:
-    image: mongo:5.0  # Use the official MongoDB image (no Dockerfile needed)
+    image: mongo:5.0  
     container_name: mongo_db
     ports:
-      - "27017:27017"  # Expose MongoDB's default port
+      - "27017:27017"  
     volumes:
-      - mongo-data:/data/db  # Persist MongoDB data
+      - mongo-data:/data/db  
 
-# Define a named volume for persisting MongoDB data
+
 volumes:
   mongo-data: 

@@ -7,6 +7,11 @@ spec:
   selector:
     matchLabels:
       app: flask-app
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -14,11 +19,25 @@ spec:
     spec:
       containers:
         - name: flask-container
-          image: anitejsriv/flask-todo-app:latest
+          image: anitejsriv/flask-todo-app:v3
           ports:
             - containerPort: 5000
           env:
             - name: MONGO_HOST
-              value: mongodb  # Service name for MongoDB
+              value: mongodb
             - name: MONGO_PORT
               value: "27017"
+          livenessProbe:                   
+            httpGet:
+              path: /healthz               
+              port: 5000
+            initialDelaySeconds: 15        
+            periodSeconds: 10             
+            failureThreshold: 3            
+          readinessProbe:                  
+            httpGet:
+              path: /ready                 
+              port: 5000
+            initialDelaySeconds: 5         
+            periodSeconds: 5               
+            failureThreshold: 3            

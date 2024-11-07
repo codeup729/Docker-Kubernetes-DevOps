@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from bson.errors import InvalidId
@@ -68,6 +68,16 @@ def remove():
     key = request.values.get("_id")
     todos.delete_one({"_id": ObjectId(key)})
     return redirect("/")
+
+@app.route('/healthz')
+def healthz():
+    # This can include more complex checks (database connection, etc.)
+    return jsonify(status="healthy"), 200
+
+@app.route('/ready')
+def ready():
+    # Readiness check can include dependencies (e.g., MongoDB connection)
+    return jsonify(status="ready"), 200
 
 @app.route("/update")
 def update():
