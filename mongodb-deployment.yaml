@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: mongodb
-          image: mongo:5.0  # Use a MongoDB version compatible with your app
+          image: mongo:5.0
           ports:
             - containerPort: 27017
           volumeMounts:
@@ -22,4 +22,5 @@ spec:
               mountPath: /data/db
       volumes:
         - name: mongo-data
-          emptyDir: {}  # For testing; for production, use a PersistentVolume
+          persistentVolumeClaim:
+            claimName: mongo-pvc
