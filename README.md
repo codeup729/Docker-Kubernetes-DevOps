@@ -17,6 +17,7 @@ This project demonstrates a straightforward frontend application built with **Py
 - **MongoDB Integration**: Provides database functionalities for the application.
 - **Docker & Docker Compose**: Facilitates containerization and multi-container configurations.
 - **Kubernetes Deployment**: Manages container orchestration with persistent storage and fault tolerance.
+- **Persistent Volume Claim (PVC)**: Ensures **MongoDB** data persists even if the pod is restarted.
 - **AWS EKS**: Hosts the Kubernetes cluster ensuring scalability and reliability.
 
 ## Architecture Diagram
@@ -28,4 +29,10 @@ User
 Flask Application (Frontend)
   |
   v
-MongoDB (Database)
+MongoDB (Database) (Uses PVC for Persistent Storage)
+```
+## Future Enhancements
+
+- **Implement User Authentication**: Enhance security by integrating user authentication mechanisms.
+- **Add Unit and Integration Tests**: Ensure code reliability and maintainability.
+- **Set Up Continuous Integration/Continuous Deployment (CI/CD)**: Automate testing and deployment pipelines.
